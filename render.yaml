@@ -4,7 +4,8 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT executar:app
+    startCommand: gunicorn -w 2 --timeout 180 --access-logfile - --error-logfile - -b 0.0.0.0:$PORT executar:app
+    healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.5
