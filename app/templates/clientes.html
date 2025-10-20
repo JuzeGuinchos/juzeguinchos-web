@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h5>Clientes</h5>
+  <form class="d-flex" method="get">
+    <input class="form-control form-control-sm me-2" name="q" value="{{q}}" placeholder="Buscar...">
+    <button class="btn btn-sm btn-outline-secondary">Buscar</button>
+  </form>
+</div>
+<div class="row g-3">
+  <div class="col-md-8">
+    <div class="table-responsive">
+      <table class="table table-sm table-striped">
+        <thead><tr><th>CNPJ</th><th>Razão Social</th><th>Fantasia</th><th>Município</th><th>UF</th></tr></thead>
+        <tbody>
+        {% for c in items %}
+          <tr>
+            <td>{{ c.cnpj }}</td><td>{{ c.razao_social }}</td><td>{{ c.nome_fantasia }}</td><td>{{ c.municipio }}</td><td>{{ c.uf }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm"><div class="card-body">
+      <h6>Novo cliente</h6>
+      <form method="post">
+        <input class="form-control form-control-sm mb-1" name="cnpj" placeholder="CNPJ">
+        <input class="form-control form-control-sm mb-1" name="razao_social" placeholder="Razão Social">
+        <input class="form-control form-control-sm mb-1" name="nome_fantasia" placeholder="Nome Fantasia">
+        <input class="form-control form-control-sm mb-1" name="municipio" placeholder="Município">
+        <input class="form-control form-control-sm mb-1" name="uf" placeholder="UF">
+        <input class="form-control form-control-sm mb-1" name="telefone" placeholder="Telefone">
+        <input class="form-control form-control-sm mb-1" name="email" placeholder="E-mail">
+        <button class="btn btn-primary btn-sm w-100">Salvar</button>
+      </form>
+    </div></div>
+  </div>
+</div>
+{% endblock %}
