@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Clientes</h3>
+<form class="row g-2 mb-3">
+  <div class="col-auto"><input type="text" class="form-control" name="q" value="{{q}}" placeholder="Buscar por nome ou CNPJ"></div>
+  <div class="col-auto"><button class="btn btn-primary">Buscar</button></div>
+  <div class="col-auto"><a class="btn btn-success" href="{{ url_for('clientes.novo') }}">Novo</a></div>
+</form>
+<table class="table table-sm table-striped">
+  <thead><tr><th>CNPJ</th><th>Razão social</th><th>Telefone</th><th>Email</th><th></th></tr></thead>
+  <tbody>
+    {% for c in clientes %}
+    <tr>
+      <td>{{ c.cnpj }}</td>
+      <td>{{ c.razao_social }}</td>
+      <td>{{ c.telefone }}</td>
+      <td>{{ c.email }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('clientes.editar', cid=c.id) }}">Editar</a>
+        <form method="post" action="{{ url_for('clientes.excluir', cid=c.id) }}" class="d-inline" onsubmit="return confirm('Excluir?')">
+          <button class="btn btn-sm btn-outline-danger">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

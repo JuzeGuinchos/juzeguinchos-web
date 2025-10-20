@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Editar' if cliente else 'Novo' }} Cliente</h3>
+<form method="post" class="row g-3">
+  {% set c = cliente or {} %}
+  {% macro f(name,label,type='text',cols='col-md-4') -%}
+    <div class="{{cols}}">
+      <label class="form-label">{{label}}</label>
+      <input class="form-control" type="{{type}}" name="{{name}}" value="{{ getattr(c, name, '') }}">
+    </div>
+  {%- endmacro %}
+  {{ f('cnpj','CNPJ') }}
+  {{ f('razao_social','Razão social','text','col-md-8') }}
+  {{ f('nome_fantasia','Nome fantasia','text','col-md-6') }}
+  {{ f('telefone','Telefone') }}
+  {{ f('email','Email','email','col-md-6') }}
+  {{ f('cep','CEP') }}
+  {{ f('logradouro','Logradouro','text','col-md-6') }}
+  {{ f('numero','Número','text','col-md-2') }}
+  {{ f('complemento','Complemento','text','col-md-4') }}
+  {{ f('bairro','Bairro','text','col-md-6') }}
+  {{ f('municipio','Município','text','col-md-4') }}
+  {{ f('uf','UF','text','col-md-2') }}
+  {{ f('inscricao_estadual','Inscrição Estadual','text','col-md-4') }}
+  <div class="col-12">
+    <label class="form-label">Observações</label>
+    <textarea class="form-control" name="observacoes">{{ getattr(c,'observacoes','') }}</textarea>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Salvar</button>
+    <a href="{{ url_for('clientes.index') }}" class="btn btn-secondary">Voltar</a>
+  </div>
+</form>
+{% endblock %}

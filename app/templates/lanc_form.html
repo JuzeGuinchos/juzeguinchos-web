@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Editar' if lanc else 'Novo' }} Lançamento</h3>
+<form method="post" class="row g-3">
+  {% set l = lanc or {} %}
+  <div class="col-md-3">
+    <label class="form-label">Data</label>
+    <input class="form-control" type="date" name="data" value="{{ (l.data.strftime('%Y-%m-%d') if lanc else comp ~ '-01') }}">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Tipo</label>
+    <select class="form-select" name="tipo">
+      {% for t in ['ENTRADA','SAIDA'] %}
+      <option value="{{t}}" {{ 'selected' if lanc and l.tipo==t else '' }}>{{t}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3"><label class="form-label">Competência</label><input class="form-control" type="month" name="competencia" value="{{ comp }}"></div>
+  <div class="col-md-3"><label class="form-label">Valor</label><input class="form-control" type="number" step="0.01" name="valor" value="{{ l.valor or '' }}"></div>
+
+  {% macro f(name,label,cols='col-md-6') -%}
+    <div class="{{cols}}"><label class="form-label">{{label}}</label><input class="form-control" name="{{name}}" value="{{ getattr(l,name,'') }}"></div>
+  {%- endmacro %}
+  {{ f('cliente','Cliente') }}
+  {{ f('cnpj','CNPJ') }}
+  {{ f('veiculo','Veículo') }}
+  {{ f('placa','Placa','col-md-3') }}
+  {{ f('categoria','Categoria','col-md-3') }}
+  {{ f('origem','Origem') }}
+  {{ f('destino','Destino') }}
+  {{ f('cidade_despesa','Cidade da despesa') }}
+  {{ f('descricao','Descrição','col-12') }}
+
+  <div class="col-12">
+    <button class="btn btn-primary">Salvar</button>
+    <a href="{{ url_for('lancamentos.index', comp=comp) }}" class="btn btn-secondary">Voltar</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Lançamentos</h3>
+<form class="row g-2 mb-3">
+  <div class="col-auto">
+    <input type="month" class="form-control" name="comp" value="{{ comp }}">
+  </div>
+  <div class="col-auto"><button class="btn btn-primary">Filtrar</button></div>
+  <div class="col-auto"><a class="btn btn-success" href="{{ url_for('lancamentos.novo') }}">Novo</a></div>
+  <div class="col-auto align-self-center"><strong>Saldo mês: R$ {{ '%.2f'|format(total or 0) }}</strong></div>
+</form>
+<table class="table table-sm table-striped">
+  <thead><tr><th>Data</th><th>Tipo</th><th>Cliente</th><th>Descrição</th><th class="text-end">Valor</th><th></th></tr></thead>
+  <tbody>
+    {% for l in lancs %}
+    <tr>
+      <td>{{ l.data.strftime('%d/%m/%Y') }}</td>
+      <td>{{ l.tipo }}</td>
+      <td>{{ l.cliente }}</td>
+      <td>{{ l.descricao }}</td>
+      <td class="text-end">{{ '%.2f'|format(l.valor or 0) }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('lancamentos.editar', id=l.id) }}">Editar</a>
+        <form class="d-inline" method="post" action="{{ url_for('lancamentos.excluir', id=l.id) }}" onsubmit="return confirm('Excluir?')">
+          <button class="btn btn-sm btn-outline-danger">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

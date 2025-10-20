@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Importar planilhas</h3>
+<form method="post" enctype="multipart/form-data" class="row g-3">
+  <div class="col-md-3">
+    <label class="form-label">Tipo</label>
+    <select class="form-select" name="tipo" required>
+      <option value="">Selecione...</option>
+      <option value="clientes">Clientes</option>
+      <option value="veiculos">Veículos</option>
+      <option value="lancamentos">Lançamentos</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Arquivo (.xlsx)</label>
+    <input type="file" name="arquivo" class="form-control" accept=".xlsx" required>
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <button class="btn btn-primary w-100">Importar</button>
+  </div>
+</form>
+<p class="text-muted mt-3">Use as mesmas colunas das suas planilhas atuais.</p>
+{% endblock %}
