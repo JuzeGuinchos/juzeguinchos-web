@@ -8,4 +8,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 ENV FLASK_APP=run.py
 ENV PYTHONPATH=/app
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:10000", "run:app"]
+CMD ["sh","-c","gunicorn -w 2 -b 0.0.0.0:$PORT run:app"]
+
