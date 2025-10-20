@@ -1,0 +1,17 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Juzé Guinchos</a>
+    <div class="d-flex">
+      <a href="{{ url_for('auth.logout') }}" class="btn btn-light">Sair</a>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5 text-center">
+  <h2>Bem-vindo</h2>
+</div>
+<footer class="text-center mt-5 text-muted">
+  © 2025 Juzé Guinchos — Auto Socorro 24h
+</footer>
+{% endblock %}

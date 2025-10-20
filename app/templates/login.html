@@ -1,0 +1,12 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="login-container text-center">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="160" class="mb-3">
+  <h4 class="mb-3">Acesso ao Sistema</h4>
+  <form method="post">
+    <input type="text" name="username" placeholder="Usuário" class="form-control mb-2" required>
+    <input type="password" name="password" placeholder="Senha" class="form-control mb-3" required>
+    <button type="submit" class="btn btn-primary w-100">Entrar</button>
+  </form>
+</div>
+{% endblock %}
